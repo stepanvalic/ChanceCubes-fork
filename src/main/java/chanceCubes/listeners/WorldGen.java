@@ -2,6 +2,7 @@ package chanceCubes.listeners;
 
 import chanceCubes.CCubesCore;
 import chanceCubes.blocks.CCubesBlocks;
+import chanceCubes.config.CCubesSettings;
 import chanceCubes.worldgen.CCSurfaceFeature;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -68,7 +69,8 @@ public class WorldGen
 		HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
 
 		PlacementUtils.register(context, CC_SURFACE, holdergetter.getOrThrow(CONFIGURED_CC_SURFACE));
-		PlacementUtils.register(context, CC_ORE, holdergetter.getOrThrow(CONFIGURED_CC_ORE), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(192))));
+		int oreVeinsPerChunk = Math.max(CCubesSettings.oreGenAmount.get(), 0);
+		PlacementUtils.register(context, CC_ORE, holdergetter.getOrThrow(CONFIGURED_CC_ORE), commonOrePlacement(oreVeinsPerChunk, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(192))));
 	}
 
 	private static List<PlacementModifier> orePlacement(PlacementModifier modifier, PlacementModifier modifier1)

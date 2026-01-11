@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -91,7 +92,11 @@ public class CCubesCore
 	public void lootTableLoad(LootTableLoadEvent event)
 	{
 		if(CCubesSettings.chestLoot.get() && event.getName().getPath().contains("chests"))
-			event.getTable().addPool(LootPool.lootPool().name("chance_cubes_cubes").add(LootItem.lootTableItem(CCubesItems.CHANCE_CUBE.get())).build());
+			event.getTable().addPool(LootPool.lootPool()
+					.name("chance_cubes_cubes")
+					.setRolls(ConstantValue.exactly(3))
+					.add(LootItem.lootTableItem(CCubesItems.CHANCE_CUBE.get()))
+					.build());
 	}
 
 	@SubscribeEvent

@@ -5,17 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#c:storage_blocks/lapis"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_lapis_lazuli": {
-      "conditions": {
-        "items": [
-          {
-            "items": "#c:gems/lapis"
+            "items": "minecraft:lapis_block"
           }
         ]
       },
@@ -31,8 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_lapis_block",
-      "has_lapis_lazuli"
+      "has_lapis_block"
     ]
   ],
   "rewards": {

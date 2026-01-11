@@ -2,16 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "tag": "c:storage_blocks/lapis"
-    },
     "L": {
-      "tag": "c:gems/lapis"
+      "item": "minecraft:lapis_block"
     }
   },
   "pattern": [
     "LLL",
-    "LBL",
+    "LLL",
     "LLL"
   ],
   "result": {

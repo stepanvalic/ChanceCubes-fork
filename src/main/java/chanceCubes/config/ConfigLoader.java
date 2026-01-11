@@ -93,10 +93,13 @@ public class ConfigLoader
 
 		CCubesSettings.oreGeneration = builder
 				.comment("True if Chance Cubes should generate like ores with in the world. false if they should not")
-				.define("GenerateAsOre", true);
+				.define("GenerateAsOre", false);
+		CCubesSettings.oreGenAmount = builder
+				.comment("Number of chance cube ore veins per chunk. Set to 0 to disable ore generation even if GenerateAsOre is true.")
+				.defineInRange("OreGenerationAmount", 0, 0, Integer.MAX_VALUE);
 		CCubesSettings.surfaceGeneration = builder
 				.comment("true if Chance Cubes should generate on the surface of the world. false if they should not")
-				.define("GenerateOnSurface", true);
+				.define("GenerateOnSurface", false);
 		CCubesSettings.surfaceGenAmount = builder
 				.comment("Chance of a chunk to have a chance cube spawned on the surface. The math is 1/(surfaceGenerationAmount), so increase to make more rare, and decrease to make more common.")
 				.defineInRange("SurfaceGenerationAmount", 100, 0, Integer.MAX_VALUE);
@@ -108,6 +111,9 @@ public class ConfigLoader
 		CCubesSettings.chestLoot = builder
 				.comment("True if Chance Cubes should generate as chest loot in the world. false if they should not")
 				.define("ChestLoot", true);
+		CCubesSettings.worldgenDefaultsMigrated = builder
+				.comment("Internal flag for applying updated worldgen defaults. Do not change manually.")
+				.define("WorldgenDefaultsMigrated", false);
 
 		CCubesSettings.blockRestoreBlacklist = builder
 				.comment("Blocks that should not be replaced when rewards are \"restored\" after a reward is over, i.e don't remove graves when the boss dome get's cleared")
@@ -183,6 +189,15 @@ public class ConfigLoader
 		}
 
 		reload();
+
+		if(!CCubesSettings.worldgenDefaultsMigrated.get())
+		{
+			CCubesSettings.oreGeneration.set(false);
+			CCubesSettings.oreGenAmount.set(0);
+			CCubesSettings.surfaceGeneration.set(false);
+			CCubesSettings.worldgenDefaultsMigrated.set(true);
+			ConfigLoader.configSpec.save();
+		}
 	}
 
 	public static void reload()

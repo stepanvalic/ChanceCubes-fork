@@ -16,7 +16,9 @@ public record AddCCubesFeaturesBiomeModifier(int id, HolderSet<Biome> biomes, Ho
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, Builder builder)
 	{
-		boolean flag = id == 0 ? CCubesSettings.surfaceGeneration.get() : CCubesSettings.oreGeneration.get();
+		boolean flag = id == 0
+				? CCubesSettings.surfaceGeneration.get()
+				: CCubesSettings.oreGeneration.get() && CCubesSettings.oreGenAmount.get() > 0;
 		if (phase == Phase.ADD && this.biomes.contains(biome) && flag)
 		{
 			BiomeGenerationSettingsBuilder generationSettings = builder.getGenerationSettings();

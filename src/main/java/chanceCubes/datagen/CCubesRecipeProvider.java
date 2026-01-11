@@ -1,7 +1,6 @@
 package chanceCubes.datagen;
 
 import chanceCubes.CCubesCore;
-import chanceCubes.blocks.CCubesBlocks;
 import chanceCubes.items.CCubesItems;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -25,16 +24,6 @@ public class CCubesRecipeProvider extends RecipeProvider
 	@Override
 	protected void buildRecipes(@NotNull RecipeOutput output)
 	{
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CCubesBlocks.CHANCE_CUBE.get())
-				.pattern("LLL")
-				.pattern("LBL")
-				.pattern("LLL")
-				.define('B', Tags.Items.STORAGE_BLOCKS_LAPIS)
-				.define('L', Tags.Items.GEMS_LAPIS)
-				.unlockedBy("has_lapis_block", has(Tags.Items.STORAGE_BLOCKS_LAPIS))
-				.unlockedBy("has_lapis_lazuli", has(Tags.Items.GEMS_LAPIS))
-				.save(output, modLoc("chance_cube_crafting"));
-
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, CCubesItems.SCANNER.get())
 				.pattern("IGI")
 				.pattern("GPG")
